@@ -123,8 +123,25 @@ kubectl 명령어를 통해 파드를 배포할 수 있다.
 
 ### kubectl
 ```
+kubectl run nginx
+```
+pod를 생성해 Docker 컨테이너를 배포한다
+
+먼저 포드를 자동으로 생성해 NGINX Docker Image의 Instance를 배포한다
+
+그런데,,, 응용프로그램 이미지는 어디서 얻을까? 이미지 매개변수를 이용해 이미지 이름을 명시해야한다
+
+```
 kubectl run nginx --image nginx
 ```
+
+처럼 말이다. 이렇게 되면 apps 의 image는 Docker Hub repository 에서 가져온다
+
+```
+kubectl get pods
+```
+
+pod 목록을 볼 수 있다.
 
 ## 21. PODs with YAML
 
