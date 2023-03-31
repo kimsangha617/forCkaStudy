@@ -106,7 +106,7 @@ spec:
 
  * pod-definition.yml
  
- ```
+```
 apiVersion: v1
 kind: Pod
 metadata:
@@ -185,3 +185,116 @@ selector:
 ```
 yaml file 작성후 
 `kubectl apply -f /root/service-definition-1.yaml`
+
+
+-----
+-----
+-----
+
+## 41. Namespace
+
+`kubectl get pods`
+명령은 모든 pod를 열거하는데 사용되지만
+기본 namespaced에 있는것만 나타낸다
+
+또 다른 namespace에 있는 pod를 열거하려면 (가정. kube-system 이라는 namespace가 있다)
+`kubectl get pods --namespace-kube-system`
+
+
+pod-definition.yml 이 있고
+
+이 파일을 이용해 pod를 만들 때
+
+`kubectl create -f pod-definition.yml`
+
+이 pod는 기본 네임 스페이스에 생성된다
+
+또 다른 namepsace에 pod를 생성하려면 namespace option 을 사용하면 된다
+
+`kubectl create -f pod-definition.yml --namespace=dev`
+
+위 포드가 dev 환경에서 항상 생성되도록 하고 싶다면
+
+커맨드라인에서 namespace를 지정하지 않더라도 
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  namespace: dev
+  labels: 
+    app: myapp
+    type: front-end
+spec: 
+  containers:
+  - name: nginx-container
+    image: nginx
+```
+`namespace: dev` 로 지정해주면 된다
+
+### Create Namespace
+dev 라는 namespace를 만들것이다
+
+namespace-dev.yml
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+ name: dev
+```
+namespace를 만드는 방법
+1.
+`kubectl create -f namespace-dev.yml`
+2.
+`kubectl create namespace dev`
+dev는 namespace-dev.yml 의 metadata.namespace 의 value 값이다
+
+강의를 보다 한 가지 재밌는게 생겼다
+
+namespace 가 3개 있다고 가정하자
+dev, default, prod
+
+`kubectl get pods` 명령어는 현재 기본 namespace로 설정되어있는 default namespace 의 pod의 기본정보들을 가져온다
+
+dev namespace의 pod 정보를 가져오려면
+`kubectl get pods --namespace=dev` namespace 옵션을 사용해야 한다
+
+dev namespace를 기본namespace로 지정하고 싶다면 ?
+`kubectl config set-context $(kubectl config current-context) --namespace=dev`
+
+모든 namespace 의 모든 pod를 보고싶다면
+`kubectl get pods --all-namespaces`
+
+### Namespace에서 리소스를 제한하려면
+
+Coumpute-quota.yml
+```
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+ name: compute-quota
+ namespace: dev
+
+spec:
+ hard:
+ pods: "10"
+ requests.cpu: "4"
+ requests.memory: 5Gi
+ limits.cpu: "10"
+ limits.memory: 10Gi
+```
+
+`kubectl create -f compute.quota.yml`
+
+10개의 포드, 10개의 cpu유닛, 10gb메모리 등을 설정한다
+
+
+------
+------
+
+## 44. Imperative vs Declarative
+
+
+ 
+
