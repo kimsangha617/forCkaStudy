@@ -140,8 +140,10 @@ service "myapp-service" created
 
 > curl http://192.168.1.2.:30008
 
+------
+------
 
- - System에 서비스가 몇개가 동작하는지 알아보는 명령어는 ?
+- System에 서비스가 몇개가 동작하는지 알아보는 명령어는 ?
    - kubectl get service
    - <img width="646" alt="image" src="https://user-images.githubusercontent.com/66237694/228995608-3fed04db-b19e-43bf-b461-8dc1139c3fe2.png">
    - 쿠버네티스가 launch 될 때 서비스가 default로 생성된다
@@ -151,14 +153,40 @@ service "myapp-service" created
     - ClusterIP
     
  - 쿠버네티스 서비스의 설정된 targetPort는 몇번인가?
- - ![image](https://user-images.githubusercontent.com/66237694/228995992-28600042-83f2-4717-8194-3f400377f7fe.png)
+  ![image](https://user-images.githubusercontent.com/66237694/228995992-28600042-83f2-4717-8194-3f400377f7fe.png)
     - 6443
-      - 쿠버네티스의 targetPort를 따로 설정해주지 않으면 default로 port의 값이 설정된다
-      - 쿠버네티스의 default port 값은 6443 이다
+
+ - kubectl describe service
+  - service의 설정값을 볼 수 있다
+  ![image](https://user-images.githubusercontent.com/66237694/228995353-2c2b7855-b7d2-4042-b9ee-9eb027504713.png)
+
+ - 쿠버네티스 서비스에 몇개의 레이블이 설정 되어있나?
+  - 위 스크린샷의 레이블 개수를 보면 됌
+  - 2개
 
 
-- kubectl describe service
- service의 설정값을 볼 수 있다
+ - 몇 개의 시스템이 배포되었는지 확인 방법은?
+  <img width="600" alt="image" src="https://user-images.githubusercontent.com/66237694/228996846-dd3919bc-856f-4cf0-96a4-c3825c7f1451.png">
+  - 1개
  
- ![image](https://user-images.githubusercontent.com/66237694/228995353-2c2b7855-b7d2-4042-b9ee-9eb027504713.png)
+ - 배포에서 pod를 생성하는데 사용되는 이미지는 무엇인가?
+  <img width="600" alt="image" src="https://user-images.githubusercontent.com/66237694/228997366-c2012529-37a1-4819-b2c8-5c9dbb0a29e0.png"> 
+  - kodekloud/simple webapp:red
 
+ - Web App UI 에 접근할 수 있는가?
+  - try to access the Web application UI using the tab `simple-webapp-ui` above the terminal 
+  - `-bash: simple-webapp-ui: command not found.`
+ 
+ - 웹 어플리케이션에 접근하기 위해 새로운 서비스를 만들어라 service-definition-1.yaml 파일을 만들어서!
+```  
+Name: webapp-service
+Type: NodePort
+targetPort: 8080
+port: 8080
+nodePort: 30080
+selector:
+  name: simple-webapp
+  type: NodePort
+```
+yaml file 작성후 
+`kubectl apply -f /root/service-definition-1.yaml`
