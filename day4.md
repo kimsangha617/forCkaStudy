@@ -172,10 +172,6 @@ service "myapp-service" created
  - 배포에서 pod를 생성하는데 사용되는 이미지는 무엇인가?
   <img width="600" alt="image" src="https://user-images.githubusercontent.com/66237694/228997366-c2012529-37a1-4819-b2c8-5c9dbb0a29e0.png"> 
   - kodekloud/simple webapp:red
-
- - Web App UI 에 접근할 수 있는가?
-  - try to access the Web application UI using the tab `simple-webapp-ui` above the terminal 
-  - `-bash: simple-webapp-ui: command not found.`
  
  - 웹 어플리케이션에 접근하기 위해 새로운 서비스를 만들어라 service-definition-1.yaml 파일을 만들어서!
 ```  
