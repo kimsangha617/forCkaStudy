@@ -295,6 +295,63 @@ spec:
 
 ## 44. Imperative vs Declarative
 
+명령적 접근법과 선언적 접근법
 
+명령적 접근법은
+1. provision a vm by the name 'web-server'
+2. Install NGINX Software on it
+3. Edit configuration file to use port '8080'
+4. Edit configuration file to web path 'var/www/nginx'
+5. Load web pages to 'var/www/nginx' from GIT Repo - X
+6. Start NGINX server
+
+선언적 접근법은
+```
+VM Name: web-server
+Package: nginx
+Port: 8080
+Path: /var/www/nginx
+Code: GIT Repo - X
+```
+
+
+Imperative
+
+    목적보다는 절차가 중요하다
+    각 단계마다 기존 상태 고려가 필요함
+
+Declarative
+
+    절차보다는 목적이 중요하다.
+    무엇이 되기를 바라는 상태를 정의하면 상태나 예외 처리는 시스템이 알아서함.
+
+    kubectl edit 은 메모리에 있느 값만 바꾸기 때문에 어디에도 기록되지 않는다. → replace 로 대체
+        kubectl replace -f nginx.yaml kubectl replace --force -f nginx.yaml
  
 
+<img width="700" alt="image" src="https://user-images.githubusercontent.com/66237694/229008603-186a16cf-8ed5-42ec-bcca-60cb6c97c545.png">
+
+<img width="700" alt="image" src="https://user-images.githubusercontent.com/66237694/229008700-d11f3b56-2429-4c7e-bde6-fee5c741a445.png">
+
+## 명령형의 단점
+- 관리자가 현재 상태를 외우고 있어야한다
+
+
+
+<img width="700" alt="image" src="https://user-images.githubusercontent.com/66237694/229009341-9c7e515a-31f3-45dd-9472-08f89df26700.png">
+
+<img width="700" alt="image" src="https://user-images.githubusercontent.com/66237694/229009411-976a47cf-d253-4c83-ad6b-e2c8070be8a5.png">
+
+- apply 명령어를 쓰자!
+
+명령형의 경우 시험에서는 쓰지만 실제 운영에서느 안쓰는 것이 좋음. yaml파일로 정의하자.
+
+- create
+ - run
+ - create
+ – expose
+ 
+- update
+ - edit
+ - scale
+ - set
