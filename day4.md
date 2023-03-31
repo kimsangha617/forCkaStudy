@@ -182,7 +182,6 @@ port: 8080
 nodePort: 30080
 selector:
   name: simple-webapp
-  type: NodePort
 ```
 yaml file 작성후 
 `kubectl apply -f /root/service-definition-1.yaml`
