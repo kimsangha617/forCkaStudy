@@ -141,15 +141,24 @@ service "myapp-service" created
 > curl http://192.168.1.2.:30008
 
 
-
- - 쿠버네티스가 launch 될 때 서비스가 실행된다
+ - System에 서비스가 몇개가 동작하는지 알아보는 명령어는 ?
+   - kubectl get service
+   - <img width="646" alt="image" src="https://user-images.githubusercontent.com/66237694/228995608-3fed04db-b19e-43bf-b461-8dc1139c3fe2.png">
+   - 쿠버네티스가 launch 될 때 서비스가 default로 생성된다
+ 
  - 쿠버네티스 service의 default type은 무엇인가 ?
+   - 위 스크린샷의 type을 보면 된다   
     - ClusterIP
+    
  - 쿠버네티스 서비스의 설정된 targetPort는 몇번인가?
+ - ![image](https://user-images.githubusercontent.com/66237694/228995992-28600042-83f2-4717-8194-3f400377f7fe.png)
     - 6443
       - 쿠버네티스의 targetPort를 따로 설정해주지 않으면 default로 port의 값이 설정된다
       - 쿠버네티스의 default port 값은 6443 이다
- - kubectl describe service
+
+
+- kubectl describe service
  service의 설정값을 볼 수 있다
  
- 
+ ![image](https://user-images.githubusercontent.com/66237694/228995353-2c2b7855-b7d2-4042-b9ee-9eb027504713.png)
+
