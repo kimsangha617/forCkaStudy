@@ -152,7 +152,7 @@ etcd 를 실행하면 port 2379 가 default인 서비스가 시작된다
 
 ./etcdctl
 
-``위에는 버전 2에서 쓰이는 명령어
+위에는 버전 2에서 쓰이는 명령어
 
 etcd에는 다양한 버젼이 있는데 v2.0 과 v3.0에는 꽤나 큰 차이가 생겼다
 
@@ -162,21 +162,28 @@ etcd의 버젼 확인 명령어
 
 etcdctl을 API 버전 3로 작업하려면 ETCDCTL_API라는 환경 변수를 각 명령에 3으로 설정해야한다
 
-``ETCDCTL_API=3 ./etcdctl version
+```
+ETCDCTL_API=3 ./etcdctl version
+```
 
 ETCD version2 에서 실행하는 버전 확인 명령어는
 
-``./etcdctl --version
+```
+./etcdctl --version
+```
 
-``ETCD version3 용
+ETCD version3 용
 
 버전 3에 값을 설정할 명령어는
-``export ETCDCTL_API=3
-./etcdctl version``
+```
+export ETCDCTL_API=3
+./etcdctl version
+```
 
-``./etcdctl put key1 value1
-
-``./etcdctl get key1
+```
+./etcdctl put key1 value1
+./etcdctl get key1
+```
 
 
 
