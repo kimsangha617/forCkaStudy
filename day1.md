@@ -112,3 +112,71 @@ kubelet은 선장에 가깝다. 컨테이너를 관리하는 선장이지만 작
 
 <img width="1075" alt="image" src="https://github.com/kimsangha617/forCkaStudy/assets/66237694/c4e4b9fa-bc80-447d-a83a-ca0e2439f4db">
 
+
+## 13. ETCD for beginners
+
+목차
+- what is ETCD?
+- what is a Key-Value Store?
+- How to get started quickly?
+- How to operate ETCD?
+
+Later
+- what is a distributed system?
+- How ETCD Operates
+- RAFT Protocol
+- Best practices on number of nodes
+
+
+ETCD란 무엇인가
+분산되고 신뢰할 수 있는 키-밸류 스토어로 안전하고 신속하다
+
+`Install ETCD
+1. Download Binaries
+curl -L https://github.com/etcd-io/etcd/releases/download/v3.3.11/etcd-v3.3.11-linux-amd64.tar.gz -o etcd-v3.3.11-linux-amd64.tar.gz
+2. Extract
+tar xzvf etcd-v3.3.11-linux-amd64.tar.gz
+3. Run ETCD Service
+./etcd
+
+
+etcd 를 실행하면 port 2379 가 default인 서비스가 시작된다
+
+./etcdctl set key1 value1
+
+저장된 데이터를 검색하려면
+
+./etcdctl get key1
+
+더 많은 옵션을 보려면 인수 없이 etcdctl 명령을 실행하면 된다
+
+./etcdctl
+
+``위에는 버전 2에서 쓰이는 명령어
+
+etcd에는 다양한 버젼이 있는데 v2.0 과 v3.0에는 꽤나 큰 차이가 생겼다
+
+etcd의 버젼 확인 명령어
+
+./etcdctl --version
+
+etcdctl을 API 버전 3로 작업하려면 ETCDCTL_API라는 환경 변수를 각 명령에 3으로 설정해야한다
+
+``ETCDCTL_API=3 ./etcdctl version
+
+ETCD version2 에서 실행하는 버전 확인 명령어는
+
+``./etcdctl --version
+
+``ETCD version3 용
+
+버전 3에 값을 설정할 명령어는
+``export ETCDCTL_API=3
+./etcdctl version``
+
+``./etcdctl put key1 value1
+
+``./etcdctl get key1
+
+
+
