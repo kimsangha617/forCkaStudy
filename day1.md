@@ -186,4 +186,70 @@ export ETCDCTL_API=3
 ```
 
 
+ETCD의 역할에 대해 알아보자
+
+이 데이터 저장소는 클러스터에 관한 정보를 저장한다 예를들어
+
+- Nodes
+- PODs
+- Configs
+- Secrets
+- Accounts
+- Roles
+- Bindings
+- Others
+
+kubectl을 실행할 때 얻게 되는 모든 정보는 ETCD Cluster 에서 온다
+
+클러스터에 변화를 줄때마다,, 가령 Node 를 추가한다거나 POD를 배포한다거나 일련의 것들이 진행 되면 ETCD 서버에 업데이트가 된다
+
+클러스터를 어떻게 설정하냐에 따라 ETCD 는 다양하게 배포가 된다
+
+이 섹션에서 쿠버네티스 배포의 두가지 유형에 대해 다룰것이다
+
+하나는 처음부터 배포하고 다른건 kubeadm tool 을 이용해서 이다
+
+클러스터를 스크래치에서 셋업하는 경우 기타 바이너리들을 직접 다운로드해 배포한다
+
+마스터 노드에 바이너리를 직접 설치하고 서비스로서 구성한다
+
+Setup - Manual
+
+```
+wget -q --https-only \
+  "https://github.com/coreos/etcd/releases/download/v3.3.9/etcd-v3.3.9-linux-amd64.tar.gz"
+
+etcd를 cluster로 구성해보자
+
+k8s에서 high-availability을 설정할 때 옵션을 보자
+
+--advertise-client-urls https://${INTERNAL_IP}:2379 \\
+
+유일한 옵션이다 ,, ETCD 가 listen 하는 기본 주소이다
+
+이건 kube API 서버에서 구성돼야할 URL 이다
+
+
+Setup - kubeadm
+
+kubeadm 클러스터를 이용해 설정을 하면
+
+kubeadm이 다양한 서버를 배포한다. kube 시스템 네임스페이스에 있는 포드로서도 말이다
+
+```kubectl get pods -n kube-system```
+
+kubernetes가 저장한 모든 키를 열거하려면 get 명령어를 실행해라
+
+```
+kubectl exec etcd-master -n kube-system etcdctl get / --prefix -keys-only
+```
+
+
+
+
+
+
+
+
+
 
